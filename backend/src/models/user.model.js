@@ -26,7 +26,7 @@ const userSchema = new mongoose.Schema({
         collegeAddress: {
             type: String,
         },
-        UniversityName: {
+        universityName: {
             type: String,
         },
     }
