@@ -4,6 +4,10 @@ import { createSection, getSections, getSectionById, deleteSection } from "../co
 
 const router = express.Router();
 
+router.get("/sectionHome", protect, (req, res) => {
+    res.send("Section Home Route is working");
+});
+
 router.post("/", protect, createSection);
 router.get("/", protect, getSections);
 router.get("/:id", protect, getSectionById);

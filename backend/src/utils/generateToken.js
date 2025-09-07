@@ -7,11 +7,11 @@ const generateToken = (res, userId) => {
     });
 
     // set cookie name `jwt`
-    const secure = process.env.NODE_ENV === "development";
+    const isProduction = process.env.NODE_ENV === "production";
     res.cookie("jwt", token, {
         httpOnly: true,
-        secure,
-        sameSite: secure ? "none" : "lax", // if production + cross-site, you may need 'none'
+        secure: isProduction,
+        sameSite: isProduction ? "none" : "lax",
         maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
     });
 
