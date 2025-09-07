@@ -1,21 +1,22 @@
 import express from "express";
+import { protect } from "../middleware/authMiddleware.js";
+import { register, login, logout } from "../controllers/auth.controller.js";
 
 const router = express.Router();
 
 router.get("/", (req, res) => {
-    res.json({ message: "Auth route" });
+    res.json({ success: true, message: "Welcome to the Home page of the Auth Route." });
 });
 
-router.post("/register", (req, res) => {
-    res.json({ message: "Register route" });
-});
+router.post("/register", register);
 
-router.post("/login", (req, res) => {
-    res.json({ message: "Login route" });
-});
+router.post("/login", login);
 
-router.post("/logout", (req, res) => {
-    res.json({ message: "Logout route" });
+router.post("/logout", logout);
+
+// Protected route example
+router.get("/profile", protect, (req, res) => {
+    res.status(200).json({ message: `Hello ${req.user.name}, you have accessed a protected route!`, user: req.user });
 });
 
 export default router;
