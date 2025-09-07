@@ -15,6 +15,7 @@ Resource Dumper is a comprehensive web application designed to help users organi
 - **Section Organization**: Group related resources into customizable sections
 - **Resource Statistics**: Track usage metrics for sections including storage used and resource counts
 - **Access Control**: Control visibility of resources with private, public, and shared options
+- **Responsive Design**: Fully responsive UI that works on desktop and mobile devices
 
 ## Tech Stack
 
@@ -26,7 +27,16 @@ Resource Dumper is a comprehensive web application designed to help users organi
 - **Multer**: File upload handling
 - **Cloudinary**: Cloud storage for files
 
+### Frontend
+- **React**: UI library
+- **React Router**: Client-side routing
+- **Tailwind CSS**: Utility-first CSS framework
+- **Axios**: HTTP client for API requests
+- **Vite**: Build tool and development server
+
 ## Project Structure
+
+### Backend Structure
 
 ```
 backend/
@@ -55,6 +65,36 @@ backend/
 │   │   └── generateToken.js       # JWT token generation
 │   └── server.js                  # Express app setup
 ├── .env                           # Environment variables
+└── package.json                   # Dependencies and scripts
+```
+
+### Frontend Structure
+
+```
+frontend/
+├── src/
+│   ├── assets/                    # Static assets
+│   ├── components/                 # Reusable UI components
+│   │   ├── Footer.jsx             # Footer component
+│   │   ├── LinkSheetModal.jsx     # Modal for creating link sheets
+│   │   ├── Materials.jsx          # Materials display component
+│   │   ├── Navbar.jsx             # Navigation bar component
+│   │   ├── NoteModal.jsx          # Modal for creating notes
+│   │   ├── ResourceCard.jsx       # Card component for resources
+│   │   ├── SectionList.jsx        # Component for displaying sections
+│   │   └── SectionModal.jsx       # Modal for creating sections
+│   ├── loading/                   # Loading components
+│   ├── pages/                     # Page components
+│   │   ├── Home.jsx               # Home page
+│   │   ├── Login.jsx              # Login/Register page
+│   │   └── MyResources.jsx        # User resources page
+│   ├── App.jsx                    # Main app component with routing
+│   ├── App.css                    # App-specific styles
+│   ├── index.css                  # Global styles
+│   └── main.jsx                   # Entry point
+├── public/                        # Public assets
+├── index.html                     # HTML template
+├── vite.config.js                 # Vite configuration
 └── package.json                   # Dependencies and scripts
 ```
 
@@ -204,7 +244,7 @@ backend/
 - Cloudinary account
 
 ### Environment Variables
-Create a `.env` file in the root directory with the following variables:
+Create a `.env` file in the backend directory with the following variables:
 
 ```
 PORT=3000
@@ -216,21 +256,41 @@ JWT_EXPIRES=7d
 CLOUDINARY_CLOUD_NAME=your_cloud_name
 CLOUDINARY_API_KEY=your_api_key
 CLOUDINARY_API_SECRET=your_api_secret
+CLIENT_URL=http://localhost:5173
 ```
 
-### Installation
+### Installation and Setup
 
+#### Backend Setup
 1. Clone the repository
-2. Install dependencies:
+2. Navigate to the backend directory:
+   ```bash
+   cd HO-My-Contributions/backend
    ```
-   cd backend
+3. Install dependencies:
+   ```bash
+   npm install
+   ```
+4. Start the development server:
+   ```bash
+   npm run backend
+   ```
+5. The server will be running at `http://localhost:3000`
+
+#### Frontend Setup
+1. Navigate to the frontend directory:
+   ```bash
+   cd HO-My-Contributions/frontend
+   ```
+2. Install dependencies:
+   ```bash
    npm install
    ```
 3. Start the development server:
+   ```bash
+   npm run dev
    ```
-   npm run backend
-   ```
-4. The server will be running at `http://localhost:3000`
+4. The frontend will be running at `http://localhost:5173`
 
 ## Authentication Flow
 
@@ -263,4 +323,25 @@ The application uses Mongoose discriminators to handle different resource types:
 - Protected routes with authentication middleware
 - File type validation
 - File size limits (10MB)
+
+## Frontend Features
+
+- Responsive design with Tailwind CSS
+- Client-side routing with React Router
+- Resource type-specific rendering
+- Modal-based forms for creating resources
+- Section-based organization
+- Resource visibility controls
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
 

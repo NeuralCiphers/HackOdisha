@@ -4,3 +4,4 @@ package-lock.json
 .DS_Store
 
 frontend/src/api.js
+frontend/src/dummyData.js
