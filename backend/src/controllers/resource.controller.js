@@ -120,3 +120,33 @@ export const deleteResource = async (req, res) => {
         res.status(500).json({ message: "Server error", error: error.message });
     }
 };
+
+// Update Note resource (title, description, content)
+export const updateResource = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { title, description, content } = req.body;
+        const resource = await Resource.findOne({ _id: id, owner: req.user._id });
+        if (!resource) return res.status(404).json({ message: "Resource not found" });
+
+        if (resource.resourceType !== "Note") {
+            return res.status(400).json({ message: "Only Note resources can be updated via this endpoint" });
+        }
+
+        const updated = await NoteResource.findByIdAndUpdate(
+            id,
+            {
+                ...(title !== undefined ? { title } : {}),
+                ...(description !== undefined ? { description } : {}),
+                ...(content !== undefined ? { content, lastEdited: new Date() } : {}),
+            },
+            { new: true }
+        );
+
+        res.status(200).json({ success: true, resource: updated });
+    } catch (error) {
+        console.error("Error updating resource:", error);
+        res.status(500).json({ message: "Server error", error: error.message });
+    }
+};
+
